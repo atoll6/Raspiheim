@@ -11,10 +11,10 @@ RUN chmod 1777 /tmp \
 
 #Install Box86-Repo
 
-RUN wget --inet4-only https://itai-nelken.github.io/weekly-box86-debs/debian/box86.list -O /etc/apt/sources.list.d/box86.list \
-&&  wget --inet4-only -qO- https://itai-nelken.github.io/weekly-box86-debs/debian/KEY.gpg | gpg --dearmor -o /etc/apt/trusted.gpg.d/box86-debs-archive-keyring.gpg \
+RUN wget --inet4-only https://ryanfortner.github.io/box86-debs/box86.list -O /etc/apt/sources.list.d/box86.list \
+&&  wget --inet4-only -qO- https://ryanfortner.github.io/box86-debs/KEY.gpg | gpg --dearmor -o /etc/apt/trusted.gpg.d/box86-debs-archive-keyring.gpg \
 &&  apt update \
-&&  apt install box86:armhf -y
+&&  apt install box86-rpi4arm64 -y
 
 
 #Install Box64-Repo
