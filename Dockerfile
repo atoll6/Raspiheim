@@ -4,14 +4,17 @@ FROM debian:bookworm-slim
 RUN dpkg --add-architecture armhf \
 &&  apt-get update -y \
 &&  apt-get upgrade -y \
-&&  apt-get install -y wget gpg git tar build-essential cmake python3 libc6:armhf
+&&  apt-get install -y wget gpg tar libc6:armhf
 
-#Build box64 with box32
-RUN git clone https://github.com/ptitSeb/box64 \
-&&  cd box64 \
-&&  mkdir build; cd build; cmake .. -D RPI5ARM64=1 -D ARM_DYNAREC=ON -D CMAKE_BUILD_TYPE=RelWithDebInfo -D BOX32=ON -D BOX32_BINFMT=ON \
-&&  make -j4 \
-&&  make install
+# Install box64 from prebuilt repository
+RUN rm -f /etc/apt/sources.list.d/box64.list /etc/apt/sources.list.d/box64.sources \
+&&  mkdir -p /usr/share/keyrings \
+&&  wget -qO- "https://atoll6.github.io/box64-debs/KEY.gpg" | gpg --dearmor -o /usr/share/keyrings/box64-archive-keyring.gpg \
+&&  echo "Types: deb\nURIs: https://atoll6.github.io/box64-debs/debian\nSuites: ./\nSigned-By: /usr/share/keyrings/box64-archive-keyring.gpg" > /etc/apt/sources.list.d/box64.sources \
+&&  apt-get update \
+&&  apt-get install -y box64-rpi5arm64 \
+&&  apt-get clean \
+&&  rm -rf /var/lib/apt/lists/*
 
 # Install Steam
 RUN mkdir   /steamcmd \
