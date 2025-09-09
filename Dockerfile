@@ -38,3 +38,7 @@ ENV SERVER_NAME=Raspiheim \
 EXPOSE 2456/udp 2457/udp
 
 ENTRYPOINT ["/scripts/valheim.sh"]
+
+LABEL org.opencontainers.image.title="Raspiheim" \
+      org.opencontainers.image.description="Valheim server for Raspberry Pi" \
+      org.opencontainers.image.vendor="atoll6"

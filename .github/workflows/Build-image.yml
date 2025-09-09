@@ -30,7 +30,3 @@ jobs:
         context: .
         push: true
         tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-        labels: |
-          org.opencontainers.image.title=Raspiheim
-          org.opencontainers.image.description=Web-managed Valheim server for Raspberry Pi
-          org.opencontainers.image.vendor=atoll6
