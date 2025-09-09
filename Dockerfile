@@ -4,7 +4,7 @@ FROM ubuntu:24.04
 RUN dpkg --add-architecture armhf \
 &&  apt-get update -y \
 &&  apt-get upgrade -y \
-&&  apt-get install -y wget gpg tar libc6:armhf
+&&  apt-get install -y wget gpg tar libc6:armhf libatomic1 libpulse0 libpulse-mainloop-glib0
 
 # Install box64 from prebuilt repository
 RUN rm -f /etc/apt/sources.list.d/box64.list /etc/apt/sources.list.d/box64.sources \
