@@ -1,4 +1,4 @@
-FROM debian:trixie-slim
+FROM ubuntu:24.04
 
 #Install Prereqs
 RUN dpkg --add-architecture armhf \
