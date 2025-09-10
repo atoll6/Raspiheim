@@ -1,11 +1,9 @@
 FROM ubuntu:24.04
 
 #Install Prereqs
-RUN dpkg --add-architecture armhf \
-&&  apt-get update -y \
+RUN apt-get update -y \
 &&  apt-get upgrade -y \
-&&  apt-get install -y wget gpg tar libc6:armhf libatomic1 libpulse0 libpulse-mainloop-glib0
-
+&&  apt-get install -y wget gpg tar libatomic1 libpulse0 libpulse-dev
 # Install box64 from prebuilt repository
 RUN rm -f /etc/apt/sources.list.d/box64.list /etc/apt/sources.list.d/box64.sources \
 &&  mkdir -p /usr/share/keyrings \
@@ -13,8 +11,7 @@ RUN rm -f /etc/apt/sources.list.d/box64.list /etc/apt/sources.list.d/box64.sourc
 &&  echo "Types: deb\nURIs: https://atoll6.github.io/box64-debs/debian\nSuites: ./\nSigned-By: /usr/share/keyrings/box64-archive-keyring.gpg" > /etc/apt/sources.list.d/box64.sources \
 &&  apt-get update \
 &&  apt-get install -y box64-rpi5arm64 \
-&&  apt-get clean \
-&&  rm -rf /var/lib/apt/lists/*
+&&  apt-get clean
 
 # Install Steam
 RUN mkdir   /steamcmd \
